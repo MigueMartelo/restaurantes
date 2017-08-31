@@ -76,6 +76,10 @@ header h1{
 	float: left;
 }
 
+.restaurante-item .image img{
+	height: 105px;
+}
+
 .restaurante-item .data{
 	float: left;
 	margin-left: 20px;
@@ -98,6 +102,7 @@ header h1{
 	text-decoration: none;
 	color: white;
 	background: #0074D9;
+	cursor: pointer;
 }
 
 .btn-editar{
@@ -169,4 +174,22 @@ nav ul li a:hover{
 	background: #1976D2;
 	color: white;
 	opacity: 0.8;
+}
+
+.seguro{
+	float: left;
+	position: absolute;
+	background-color: white;
+	padding: 10px;
+	margin-top: -45px;
+}
+
+.imagen-rest-detail{
+	width: 200px;
+	float: left;
+	margin-right: 30px;
+}
+
+.data-rest{
+	float: left;
 }

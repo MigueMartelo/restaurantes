@@ -29,8 +29,29 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
                 RestauranteService.prototype.getRestaurantes = function () {
                     return this._http.get("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/restaurantes").map(function (res) { return res.json(); });
                 };
-                RestauranteService.prototype.getRestaurante = function (id) {
-                    return this._http.get("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/restaurante/" + id).map(function (res) { return res.json(); });
+                RestauranteService.prototype.getRestaurante = function (id, random) {
+                    if (random === void 0) { random = null; }
+                    if (random == null) {
+                        return this._http.get("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/restaurante/" + id).map(function (res) { return res.json(); });
+                    }
+                    else {
+                        return this._http.get("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/random-restaurante").map(function (res) { return res.json(); });
+                    }
+                };
+                RestauranteService.prototype.addRestaurante = function (restaurante) {
+                    var json = JSON.stringify(restaurante);
+                    var params = "json=" + json;
+                    var headers = new http_1.Headers({ "Content-Type": "application/x-www-form-urlencoded" });
+                    return this._http.post("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/restaurantes", params, { headers: headers }).map(function (res) { return res.json(); });
+                };
+                RestauranteService.prototype.editRestaurante = function (id, restaurante) {
+                    var json = JSON.stringify(restaurante);
+                    var params = "json=" + json;
+                    var headers = new http_1.Headers({ "Content-Type": "application/x-www-form-urlencoded" });
+                    return this._http.post("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/update-restaurante/" + id, params, { headers: headers }).map(function (res) { return res.json(); });
+                };
+                RestauranteService.prototype.deleteRestaurante = function (id) {
+                    return this._http.get("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/delete-restaurante/" + id).map(function (res) { return res.json(); });
                 };
                 RestauranteService = __decorate([
                     core_1.Injectable(), 

@@ -25,7 +25,8 @@ System.register(["angular2/core", "angular2/router", "../services/restaurante.se
             }],
         execute: function() {
             RestaurantesListComponent = (function () {
-                function RestaurantesListComponent(_restauranteService) {
+                function RestaurantesListComponent(_router, _restauranteService) {
+                    this._router = _router;
                     this._restauranteService = _restauranteService;
                     this.titulo = "Listado de Restaurantes";
                 }
@@ -50,6 +51,29 @@ System.register(["angular2/core", "angular2/router", "../services/restaurante.se
                         }
                     });
                 };
+                RestaurantesListComponent.prototype.onBorrarConfirm = function (id) {
+                    this.confirmado = id;
+                };
+                RestaurantesListComponent.prototype.onCancelarConfirm = function (id) {
+                    this.confirmado = null;
+                };
+                RestaurantesListComponent.prototype.onBorrarRestaurante = function (id) {
+                    var _this = this;
+                    this._restauranteService.deleteRestaurante(id).subscribe(function (result) {
+                        _this.restaurantes = result.data;
+                        _this.status = result.status;
+                        if (_this.status !== "success") {
+                            console.error("Error en el servidor");
+                        }
+                        _this.getRestaurantes();
+                        _this.loading = 'hide';
+                    }, function (error) {
+                        _this.errorMessage = error;
+                        if (_this.errorMessage !== null) {
+                            console.error(_this.errorMessage);
+                        }
+                    });
+                };
                 RestaurantesListComponent = __decorate([
                     core_1.Component({
                         selector: "restaurantes-list",
@@ -57,7 +81,7 @@ System.register(["angular2/core", "angular2/router", "../services/restaurante.se
                         directives: [router_1.ROUTER_DIRECTIVES],
                         providers: [restaurante_service_1.RestauranteService]
                     }), 
-                    __metadata('design:paramtypes', [restaurante_service_1.RestauranteService])
+                    __metadata('design:paramtypes', [router_1.Router, restaurante_service_1.RestauranteService])
                 ], RestaurantesListComponent);
                 return RestaurantesListComponent;
             }());

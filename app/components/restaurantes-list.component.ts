@@ -17,10 +17,11 @@ export class RestaurantesListComponent implements OnInit{
 	public status:string;
 	public errorMessage:any;
 	public loading;
+	public confirmado;
 
-	constructor(private _restauranteService: RestauranteService){}
+	constructor(private _router: Router, private _restauranteService: RestauranteService){}
 
-	ngOnInit() { 
+	ngOnInit() {
 		this.loading = 'show';
 		this.getRestaurantes();
 		console.log("restaurante-list component cargado");
@@ -36,6 +37,35 @@ export class RestaurantesListComponent implements OnInit{
 								console.error("Error en el servidor");
 							}
 
+							this.loading = 'hide';
+				},
+				error => {
+							this.errorMessage = <any>error;
+							if (this.errorMessage !== null) {
+								console.error(this.errorMessage);
+							}
+				}
+			);
+	}
+
+	onBorrarConfirm(id){
+		this.confirmado = id;
+	}
+
+	onCancelarConfirm(id){
+		this.confirmado = null;
+	}
+
+	onBorrarRestaurante(id){
+		this._restauranteService.deleteRestaurante(id).subscribe(
+				result => {
+							this.restaurantes = result.data;
+							this.status = result.status;
+
+							if (this.status !== "success") {
+								console.error("Error en el servidor");
+							}
+							this.getRestaurantes();
 							this.loading = 'hide';
 				},
 				error => {

@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/router", "./components/restaurantes-list.component", "./components/restaurante-detail.component"], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/router", "./components/restaurantes-list.component", "./components/restaurante-detail.component", "./components/restaurante-add.component", "./components/restaurante-edit.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", "angular2/router", "./components/restaurantes-
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, restaurantes_list_component_1, restaurante_detail_component_1;
+    var core_1, router_1, restaurantes_list_component_1, restaurante_detail_component_1, restaurante_add_component_1, restaurante_edit_component_1;
     var AppComponent;
     return {
         setters:[
@@ -25,6 +25,12 @@ System.register(["angular2/core", "angular2/router", "./components/restaurantes-
             },
             function (restaurante_detail_component_1_1) {
                 restaurante_detail_component_1 = restaurante_detail_component_1_1;
+            },
+            function (restaurante_add_component_1_1) {
+                restaurante_add_component_1 = restaurante_add_component_1_1;
+            },
+            function (restaurante_edit_component_1_1) {
+                restaurante_edit_component_1 = restaurante_edit_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -37,11 +43,15 @@ System.register(["angular2/core", "angular2/router", "./components/restaurantes-
                         templateUrl: "app/view/home.html",
                         directives: [restaurantes_list_component_1.RestaurantesListComponent,
                             restaurante_detail_component_1.RestauranteDetailComponent,
+                            restaurante_add_component_1.RestauranteAddComponent,
                             router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
                         { path: '/', name: 'Home', component: restaurantes_list_component_1.RestaurantesListComponent, useAsDefault: true },
-                        { path: '/restaurante/:id', name: 'Restaurante', component: restaurante_detail_component_1.RestauranteDetailComponent }
+                        { path: '/restaurante/:id', name: 'Restaurante', component: restaurante_detail_component_1.RestauranteDetailComponent },
+                        { path: '/crear-restaurante/', name: 'CrearRestaurante', component: restaurante_add_component_1.RestauranteAddComponent },
+                        { path: '/editar-restaurante/:id', name: 'EditarRestaurante', component: restaurante_edit_component_1.RestauranteEditComponent },
+                        { path: '/donde-como-hoy/:random', name: 'DondeComoHoy', component: restaurante_detail_component_1.RestauranteDetailComponent }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

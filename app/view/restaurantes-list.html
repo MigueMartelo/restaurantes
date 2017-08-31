@@ -5,15 +5,21 @@
 		<img src="../../assets/images/loading.gif" *ngIf="loading == 'show'">
 	</li>
 	<li *ngFor="#restaurante of restaurantes" class="restaurante-item">
-		<div class="image"></div>
+		<div class="image">
+			<img src="http://localhost/curso-angular/restaurantes/api-rest/uploads/{{restaurante.imagen}}" *ngIf="restaurante.imagen && restaurante.imagen !== 'null'">
+		</div>
 		<div class="data">
 			<h4>{{restaurante.nombre}}</h4>
 			<p>{{restaurante.direccion}}</p>
 			<p>
 				<a [routerLink]="['Restaurante', {id:restaurante.id}]" class="btn btn-ver">Ver</a>
-				<a href="#" class="btn btn-editar">Editar</a>
-				<a href="#" class="btn btn-eliminar">Eliminar</a>
+				<a [routerLink]="['EditarRestaurante', {id:restaurante.id}]" class="btn btn-editar">Editar</a>
+				<a (click)="onBorrarConfirm(restaurante.id)" class="btn btn-eliminar">Eliminar</a>
 			</p>
+			<div class="seguro" *ngIf="confirmado === restaurante.id">
+				<a (click)="onBorrarRestaurante(restaurante.id)" class="btn btn-eliminar">Eliminar</a>
+				<a (click)="onCancelarConfirm(restaurante.id)" class="btn btn-ver">Cancelar</a>
+			</div>
 		</div>
 		<div class="clearfix"></div>
 	</li>
