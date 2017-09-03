@@ -9,14 +9,14 @@ export class RestauranteService{
 	constructor(private _http: Http){}
 
 	getRestaurantes(){
-		return this._http.get("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/restaurantes").map(res => res.json());
+		return this._http.get("http://localhost/curso-angular/api-rest/restaurantes-api.php/restaurantes").map(res => res.json());
 	}
 
 	getRestaurante(id:string, random = null){
 		if (random == null) {
-			return this._http.get("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/restaurante/"+id).map(res => res.json());
+			return this._http.get("http://localhost/curso-angular/api-rest/restaurantes-api.php/restaurante/"+id).map(res => res.json());
 		}else{
-			return this._http.get("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/random-restaurante").map(res => res.json());
+			return this._http.get("http://localhost/curso-angular/api-rest/restaurantes-api.php/random-restaurante").map(res => res.json());
 		}
 
 	}
@@ -26,7 +26,7 @@ export class RestauranteService{
 		let params = "json="+json;
 		let headers = new Headers({"Content-Type":"application/x-www-form-urlencoded"});
 
-		return this._http.post("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/restaurantes", params, {headers: headers}).map(
+		return this._http.post("http://localhost/curso-angular/api-rest/restaurantes-api.php/restaurantes", params, {headers: headers}).map(
 				res => res.json());
 	}
 
@@ -35,11 +35,11 @@ export class RestauranteService{
 		let params = "json="+json;
 		let headers = new Headers({"Content-Type":"application/x-www-form-urlencoded"});
 
-		return this._http.post("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/update-restaurante/"+id, params, {headers: headers}).map(
+		return this._http.post("http://localhost/curso-angular/api-rest/restaurantes-api.php/update-restaurante/"+id, params, {headers: headers}).map(
 				res => res.json());
 	}
 
 	deleteRestaurante(id:string){
-		return this._http.get("http://localhost/curso-angular/restaurantes/api-rest/restaurantes-api.php/delete-restaurante/"+id).map(res => res.json());
+		return this._http.get("http://localhost/curso-angular/api-rest/restaurantes-api.php/delete-restaurante/"+id).map(res => res.json());
 	}
 }
